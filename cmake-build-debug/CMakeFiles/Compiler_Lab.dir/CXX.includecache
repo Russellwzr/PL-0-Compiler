@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Compiler_Lab/Lexical_Analyzer.h
+bits/stdc++.h
+-
+utils.h
+D:/Compiler_Lab/utils.h
+
+D:/Compiler_Lab/Syntax_Analyzer.h
+bits/stdc++.h
+-
+
+D:/Compiler_Lab/main.cpp
+bits/stdc++.h
+-
+Lexical_Analyzer.h
+D:/Compiler_Lab/Lexical_Analyzer.h
+Syntax_Analyzer.h
+D:/Compiler_Lab/Syntax_Analyzer.h
+
+D:/Compiler_Lab/utils.h
+bits/stdc++.h
+-
+
