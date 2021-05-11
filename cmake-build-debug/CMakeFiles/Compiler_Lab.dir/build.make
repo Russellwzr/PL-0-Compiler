@@ -42,10 +42,10 @@ RM = "D:\CLion\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Compiler_Lab
+CMAKE_SOURCE_DIR = D:\PL-0-Compiler
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Compiler_Lab\cmake-build-debug
+CMAKE_BINARY_DIR = D:\PL-0-Compiler\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Compiler_Lab.dir/depend.make
@@ -58,29 +58,29 @@ include CMakeFiles/Compiler_Lab.dir/flags.make
 
 CMakeFiles/Compiler_Lab.dir/main.cpp.obj: CMakeFiles/Compiler_Lab.dir/flags.make
 CMakeFiles/Compiler_Lab.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Compiler_Lab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Compiler_Lab.dir/main.cpp.obj"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Compiler_Lab.dir\main.cpp.obj -c D:\Compiler_Lab\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PL-0-Compiler\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Compiler_Lab.dir/main.cpp.obj"
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Compiler_Lab.dir\main.cpp.obj -c D:\PL-0-Compiler\main.cpp
 
 CMakeFiles/Compiler_Lab.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Compiler_Lab.dir/main.cpp.i"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Compiler_Lab\main.cpp > CMakeFiles\Compiler_Lab.dir\main.cpp.i
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PL-0-Compiler\main.cpp > CMakeFiles\Compiler_Lab.dir\main.cpp.i
 
 CMakeFiles/Compiler_Lab.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Compiler_Lab.dir/main.cpp.s"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Compiler_Lab\main.cpp -o CMakeFiles\Compiler_Lab.dir\main.cpp.s
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PL-0-Compiler\main.cpp -o CMakeFiles\Compiler_Lab.dir\main.cpp.s
 
 CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj: CMakeFiles/Compiler_Lab.dir/flags.make
 CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj: ../Syntax_Analyzer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Compiler_Lab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.obj -c D:\Compiler_Lab\Syntax_Analyzer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\PL-0-Compiler\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj"
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.obj -c D:\PL-0-Compiler\Syntax_Analyzer.cpp
 
 CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.i"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Compiler_Lab\Syntax_Analyzer.cpp > CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.i
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\PL-0-Compiler\Syntax_Analyzer.cpp > CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.i
 
 CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.s"
-	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Compiler_Lab\Syntax_Analyzer.cpp -o CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.s
+	C:\PROGRA~2\Dev-Cpp\MinGW64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\PL-0-Compiler\Syntax_Analyzer.cpp -o CMakeFiles\Compiler_Lab.dir\Syntax_Analyzer.cpp.s
 
 # Object files for target Compiler_Lab
 Compiler_Lab_OBJECTS = \
@@ -96,7 +96,7 @@ Compiler_Lab.exe: CMakeFiles/Compiler_Lab.dir/build.make
 Compiler_Lab.exe: CMakeFiles/Compiler_Lab.dir/linklibs.rsp
 Compiler_Lab.exe: CMakeFiles/Compiler_Lab.dir/objects1.rsp
 Compiler_Lab.exe: CMakeFiles/Compiler_Lab.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Compiler_Lab\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Compiler_Lab.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\PL-0-Compiler\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Compiler_Lab.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Compiler_Lab.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -109,6 +109,6 @@ CMakeFiles/Compiler_Lab.dir/clean:
 .PHONY : CMakeFiles/Compiler_Lab.dir/clean
 
 CMakeFiles/Compiler_Lab.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\Compiler_Lab D:\Compiler_Lab D:\Compiler_Lab\cmake-build-debug D:\Compiler_Lab\cmake-build-debug D:\Compiler_Lab\cmake-build-debug\CMakeFiles\Compiler_Lab.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\PL-0-Compiler D:\PL-0-Compiler D:\PL-0-Compiler\cmake-build-debug D:\PL-0-Compiler\cmake-build-debug D:\PL-0-Compiler\cmake-build-debug\CMakeFiles\Compiler_Lab.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Compiler_Lab.dir/depend
 

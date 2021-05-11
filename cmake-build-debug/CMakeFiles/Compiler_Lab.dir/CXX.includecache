@@ -6,25 +6,17 @@
 
 #IncludeRegexTransform: 
 
-D:/Compiler_Lab/Lexical_Analyzer.h
-bits/stdc++.h
--
-utils.h
-D:/Compiler_Lab/utils.h
-
-D:/Compiler_Lab/Syntax_Analyzer.h
-bits/stdc++.h
--
-
-D:/Compiler_Lab/main.cpp
-bits/stdc++.h
--
-Lexical_Analyzer.h
-D:/Compiler_Lab/Lexical_Analyzer.h
+D:/PL-0-Compiler/Syntax_Analyzer.cpp
 Syntax_Analyzer.h
-D:/Compiler_Lab/Syntax_Analyzer.h
+D:/PL-0-Compiler/Syntax_Analyzer.h
+utils.h
+D:/PL-0-Compiler/utils.h
 
-D:/Compiler_Lab/utils.h
+D:/PL-0-Compiler/Syntax_Analyzer.h
+bits/stdc++.h
+-
+
+D:/PL-0-Compiler/utils.h
 bits/stdc++.h
 -
 

@@ -1,4 +1,4 @@
-# Install script for directory: D:/Compiler_Lab
+# Install script for directory: D:/PL-0-Compiler
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Compiler_Lab/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/PL-0-Compiler/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

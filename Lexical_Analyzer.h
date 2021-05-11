@@ -82,7 +82,7 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                     if(mp[tmp] == KEY_WORDS){
                         //string tmp_sym  = tmp;
                         //tmp_sym += "SYM";
-                        SYM.push_back(tmp);
+                        SYM.push_back("KEY");
                         LABEL.push_back(tmp);
                         output_info += tmp;
                         output_info += '\n';
@@ -121,7 +121,7 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                     if(mp.find(tmp2) != mp.end()){
                         //string tmp_sym  = tmp2;
                         //tmp_sym += "SYM";
-                        SYM.push_back(tmp2);
+                        SYM.push_back("KEY");
                         LABEL.push_back(tmp2);
                         output_info += tmp2;
                         output_info += '\n';
@@ -132,7 +132,7 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                         if(mp.find(tmp) != mp.end()){
                             //string tmp_sym  = tmp;
                             //tmp_sym += "SYM";
-                            SYM.push_back(tmp);
+                            SYM.push_back("KEY");
                             LABEL.push_back(tmp);
                             output_info += tmp;
                             output_info += '\n';
@@ -148,7 +148,7 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                     if(mp.find(tmp) != mp.end()){
                         //string tmp_sym  = tmp;
                         //tmp_sym += "SYM";
-                        SYM.push_back(tmp);
+                        SYM.push_back("KEY");
                         LABEL.push_back(tmp);
                         output_info += tmp;
                         output_info += '\n';

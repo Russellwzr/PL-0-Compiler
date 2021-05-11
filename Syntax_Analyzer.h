@@ -22,11 +22,11 @@ class Syntax_Analyzer{
 
         bool ConstantDefine(int);
 
-        bool UnsignedNum(int);
+        //bool UnsignedNum(int);
 
         bool VariableDeclare(int);
 
-        bool Identifier(int);
+        //bool Identifier(int);
 
         bool ProcedureDeclare(int);
 
@@ -46,9 +46,9 @@ class Syntax_Analyzer{
 
         bool Factor(int);
 
-        bool AddorSubOp(int);
+        //bool AddorSubOp(int);
 
-        bool MulorDivOp(int);
+        //bool MulorDivOp(int);
 
         bool RelationOp(int);
 
@@ -62,15 +62,21 @@ class Syntax_Analyzer{
 
         bool WriteSentence(int);
 
-        bool Letter(int);
+        //bool Letter(int);
 
-        bool Num(int);
+        //bool Num(int);
 
-        bool Empty(int);
+        bool EmptySentence(int);
 
         void PrintErrorPos(string msg);
 
         void InsertNode(int father, string label);
+
+        void TreeOutput(int);
+
+        void dfs(int &index, int depth);
+
+        void TransferOutput(bool debug);
 
         vector<string> SYM;
         vector<string> LABEL;
@@ -80,6 +86,11 @@ class Syntax_Analyzer{
         vector<string> nodeInfo;
         int curIndex;
 
+        vector<string> tokens;
+        string exp;
+        string ans;
+
+        int procnt;
 };
 
 #endif //COMPILER_LAB_SYNTAX_ANALYZER_H

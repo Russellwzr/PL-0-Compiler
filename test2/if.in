@@ -1,0 +1,14 @@
+var
+	a,b,c,d,e,f,g,h;
+begin
+	read(a,b);
+	if a > b then write(a);
+	if a < b then write(b);
+	if a = b then write(c);
+	if a # b then write(d);
+	if a <= b then write(e);
+	if a >= b then write(f);
+	if odd a then write(g);
+	if odd (a+b*c/d*(f*g-(h))) then write(a);
+	if (a+b-c) # d+e*h then write(b)
+end.

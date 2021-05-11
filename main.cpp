@@ -22,8 +22,10 @@ vector<string> LABEL;
 
 int main() {
 
-    freopen("../test/test1.txt","r", stdin);
-    //freopen("../test/more_1.out","w",stdout);
+    bool debug = false;
+
+    //freopen("../test2/t3.in","r", stdin);
+    //freopen("../test2/t3.txt","w",stdout);
 
     // Create Reserved Words Map
     map<string, int> mp;
@@ -39,18 +41,24 @@ int main() {
 
     if(GETSYM(SYM, ID, NUM, LABEL, mp) < 0){
         cout<<"Lexical Error"<<endl;
+        return 0;
     }
-    else{
-        LEXICAL_OUTPUT();
+
+    //else{
+        //LEXICAL_OUTPUT();
         //cout << "LABEL OUTPUT"<< endl;
         //for(int i = 0; i < LABEL.size(); i ++){
         //    cout << LABEL[i] << endl;
         //}
-    }
+    //}
 
-    //Syntax_Analyzer Test = Syntax_Analyzer(SYM);
-    //string tmp = "Precedure";
-    //Test.PrintErrorPos(tmp);
+    Syntax_Analyzer Test = Syntax_Analyzer(SYM, LABEL);
+    if(Test.Program()){
+        Test.TransferOutput(debug);
+    }
+    else{
+        cout<<"Syntax Error"<<endl;
+    }
 
     return 0;
 }

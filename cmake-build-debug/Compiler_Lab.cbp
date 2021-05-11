@@ -8,28 +8,28 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="D:/Compiler_Lab/cmake-build-debug"/>
+				<Option working_dir="D:/PL-0-Compiler/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="D:/Compiler_Lab/cmake-build-debug"/>
+				<Option working_dir="D:/PL-0-Compiler/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Compiler_Lab">
-				<Option output="D:/Compiler_Lab/cmake-build-debug/Compiler_Lab.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/Compiler_Lab/cmake-build-debug"/>
+				<Option output="D:/PL-0-Compiler/cmake-build-debug/Compiler_Lab.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/PL-0-Compiler/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -43,15 +43,15 @@
 					<Add directory="C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 Compiler_Lab"/>
-					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 Compiler_Lab"/>
+					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Compiler_Lab/fast">
-				<Option output="D:/Compiler_Lab/cmake-build-debug/Compiler_Lab.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/Compiler_Lab/cmake-build-debug"/>
+				<Option output="D:/PL-0-Compiler/cmake-build-debug/Compiler_Lab.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/PL-0-Compiler/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -65,39 +65,39 @@
 					<Add directory="C:/Program Files (x86)/Dev-Cpp/MinGW64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 Compiler_Lab/fast"/>
-					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 Compiler_Lab/fast"/>
+					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="D:/Compiler_Lab/cmake-build-debug"/>
+				<Option working_dir="D:/PL-0-Compiler/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/Compiler_Lab/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/Dev-Cpp/MinGW64/bin/mingw32-make.exe -f &quot;D:/PL-0-Compiler/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/Compiler_Lab/Lexical_Analyzer.h">
+		<Unit filename="D:/PL-0-Compiler/Lexical_Analyzer.h">
 			<Option target="Compiler_Lab"/>
 		</Unit>
-		<Unit filename="D:/Compiler_Lab/Syntax_Analyzer.cpp">
+		<Unit filename="D:/PL-0-Compiler/Syntax_Analyzer.cpp">
 			<Option target="Compiler_Lab"/>
 		</Unit>
-		<Unit filename="D:/Compiler_Lab/Syntax_Analyzer.h">
+		<Unit filename="D:/PL-0-Compiler/Syntax_Analyzer.h">
 			<Option target="Compiler_Lab"/>
 		</Unit>
-		<Unit filename="D:/Compiler_Lab/main.cpp">
+		<Unit filename="D:/PL-0-Compiler/main.cpp">
 			<Option target="Compiler_Lab"/>
 		</Unit>
-		<Unit filename="D:/Compiler_Lab/utils.h">
+		<Unit filename="D:/PL-0-Compiler/utils.h">
 			<Option target="Compiler_Lab"/>
 		</Unit>
-		<Unit filename="D:/Compiler_Lab/CMakeLists.txt">
+		<Unit filename="D:/PL-0-Compiler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

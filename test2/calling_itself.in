@@ -1,0 +1,12 @@
+var a,b;
+procedure fact;
+begin
+	if a > 1 then begin
+		b := a * b;
+		call fact
+	end;
+end;
+begin
+	b := 1;
+	call fact;
+end.
