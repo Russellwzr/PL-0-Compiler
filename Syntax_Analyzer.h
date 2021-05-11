@@ -14,6 +14,12 @@ class Syntax_Analyzer{
 
         ~Syntax_Analyzer();
 
+        //********************************************************************************
+        //
+        // Recursive Descent Subroutines For Syntax Analysis
+        //
+        //
+
         bool Program();
 
         bool SubProgram(int);
@@ -68,29 +74,44 @@ class Syntax_Analyzer{
 
         bool EmptySentence(int);
 
+        //
+        //
+        //
+        //********************************************************************************
+
+        // Output Error Information
         void PrintErrorPos(string msg);
 
+        // Insert a node to the syntax tree
         void InsertNode(int father, string label);
 
+        // Output the syntax tree
         void TreeOutput(int);
 
+        // Depth first search
         void dfs(int &index, int depth);
 
+        // Transfer the output for debugging
         void TransferOutput(bool debug);
 
-        vector<string> SYM;
-        vector<string> LABEL;
-        int ip;
+    private:
 
-        vector<vector<int> > tree;
-        vector<string> nodeInfo;
-        int curIndex;
+        vector<string> SYM;         // word type (KEY/IDENT/NUM)
+        vector<string> LABEL;       // word itself (lexical analyzer's output)
+        int ip;                     // index pointer for LABEL and SYM
 
+        vector<vector<int> > tree;  // adjacency list for syntax tree
+        vector<string> nodeInfo;    // tree node information (node name)
+        int curIndex;               // current tree node number (node id)
+
+        // for output transfer
         vector<string> tokens;
         string exp;
         string ans;
 
+        // procedure declare level ( if procnt >= 4 then print syntax error.)
         int procnt;
+
 };
 
 #endif //COMPILER_LAB_SYNTAX_ANALYZER_H

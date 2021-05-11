@@ -1,5 +1,10 @@
-// Zhirui WANG
-// Compiler Lab
+//******************************************************************************************************************
+//
+// Author : Zhirui WANG
+// Title  : SDU Compiler Lab
+//                --- A PL/0 Language Compiler
+//
+//******************************************************************************************************************
 
 #include <bits/stdc++.h>
 #include "Lexical_Analyzer.h"
@@ -17,11 +22,13 @@ vector<string> SYM;
 vector<string> ID;
 // NUM : user-defined num
 vector<ll> NUM;
-// LABEL : the label
+// LABEL : words array (lexical analyzer's output)
 vector<string> LABEL;
 
 int main() {
 
+    // true  : output for debugging
+    // false : output for oj
     bool debug = false;
 
     //freopen("../test2/t3.in","r", stdin);
@@ -30,30 +37,25 @@ int main() {
     // Create Reserved Words Map
     map<string, int> mp;
     for(int i = 0; i < 13; i ++){
-        mp[key_words[i]] = KEY_WORDS;
+        mp[key_words[i]] = KEY_WORDS;  // 1
     }
     for(int i = 0; i < 11; i ++){
-        mp[key_operators[i]] = KEY_OP;
+        mp[key_operators[i]] = KEY_OP; // 2
     }
     for(int i = 0; i < 5; i ++){
-        mp[key_split[i]] = KEY_SP;
+        mp[key_split[i]] = KEY_SP;     // 3
     }
 
+    // Lexical Analyzer
     if(GETSYM(SYM, ID, NUM, LABEL, mp) < 0){
         cout<<"Lexical Error"<<endl;
         return 0;
     }
 
-    //else{
-        //LEXICAL_OUTPUT();
-        //cout << "LABEL OUTPUT"<< endl;
-        //for(int i = 0; i < LABEL.size(); i ++){
-        //    cout << LABEL[i] << endl;
-        //}
-    //}
-
+    // Syntax Analyzer
     Syntax_Analyzer Test = Syntax_Analyzer(SYM, LABEL);
     if(Test.Program()){
+        // Output Syntax Tree
         Test.TransferOutput(debug);
     }
     else{
