@@ -13,8 +13,16 @@
   <component name="ChangeListManager">
     <list default="true" id="c4686a31-248a-40f5-a8ba-ceb0d5971dc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lexical_Analyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Lexical_Analyzer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Syntax_Analyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Syntax_Analyzer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Syntax_Analyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Syntax_Analyzer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Compiler_Lab.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Compiler_Lab.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Compiler_Lab.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2/t1.in" beforeDir="false" afterPath="$PROJECT_DIR$/test2/t1.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2/t4.in" beforeDir="false" afterPath="$PROJECT_DIR$/test2/t4.in" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,6 +101,13 @@
       <workItem from="1620721214767" duration="5011000" />
       <workItem from="1620733003448" duration="4084000" />
       <workItem from="1620738772809" duration="3987000" />
+      <workItem from="1620828879587" duration="195000" />
+      <workItem from="1620834257047" duration="1042000" />
+      <workItem from="1621476872488" duration="1463000" />
+      <workItem from="1622082968109" duration="3299000" />
+      <workItem from="1622103384638" duration="11212000" />
+      <workItem from="1622374540295" duration="2658000" />
+      <workItem from="1622449506338" duration="8931000" />
     </task>
     <servers />
   </component>
@@ -121,6 +136,10 @@
         <watch expression="LABEL[ip]" language="ObjectiveC" />
         <watch expression="LABEL[ip-1]" language="ObjectiveC" />
         <watch expression="procnt" language="ObjectiveC" />
+        <watch expression="TABLE[idx].t[i]" language="ObjectiveC" />
+        <watch expression="TABLE[idx].t" language="ObjectiveC" />
+        <watch expression="CODE.size()" language="ObjectiveC" />
+        <watch expression="CODE" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

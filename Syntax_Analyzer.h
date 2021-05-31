@@ -4,6 +4,85 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+struct tableElement{
+    string NAME;
+    string KIND;
+    int LEVEL;
+    int VAL;
+    int ADR;
+    int NEXT;
+    int CODEINDEX;
+    tableElement(){
+        NAME = KIND = "";
+        LEVEL = VAL = ADR = 0;
+        NEXT = -1;
+        CODEINDEX = 0;
+    }
+    tableElement(string NA, string KI, int LE, int VA, int AD, int NE){
+        NAME = NA;
+        KIND = KI;
+        LEVEL = LE;
+        VAL = VA;
+        ADR = AD;
+        NEXT = NE;
+        CODEINDEX = 0;
+    }
+    tableElement(string NA, string KI, int LE, int VA, int AD, int NE, int CO){
+        NAME = NA;
+        KIND = KI;
+        LEVEL = LE;
+        VAL = VA;
+        ADR = AD;
+        NEXT = NE;
+        CODEINDEX = CO;
+    }
+};
+
+struct tableList{
+    vector<tableElement> t;
+    int preIdx1;
+    int preIdx2;
+    int size;
+    tableList(){
+        preIdx1 = preIdx2 = -1;
+        size = 3;
+    }
+    tableList(int p1, int p2){
+        preIdx1 = p1;
+        preIdx2 = p2;
+        size = 3;
+    }
+};
+
+struct Instruction{
+    string f;
+    int l;
+    int a;
+    Instruction(){
+        f = "";
+        l = a = 0;
+    }
+    Instruction(string ff,int ll, int aa){
+        f = ff;
+        l = ll;
+        a = aa;
+    }
+};
+
+struct Address{
+    int l;
+    int a;
+    Address(){
+        l = a = 0;
+    }
+    Address(int ll, int aa){
+        l = ll;
+        a = aa;
+    }
+};
+
+
 class Syntax_Analyzer{
 
     public:
@@ -22,7 +101,7 @@ class Syntax_Analyzer{
 
         bool Program();
 
-        bool SubProgram(int);
+        bool SubProgram(int, bool);
 
         bool ConstantDeclare(int);
 
@@ -94,6 +173,14 @@ class Syntax_Analyzer{
         // Transfer the output for debugging
         void TransferOutput(bool debug);
 
+        void TableOutput();
+
+        Address CalAddress(string name, bool flag);
+
+        bool IsRedefined(string name, int idx);
+
+        void CodeOutput();
+
     private:
 
         vector<string> SYM;         // word type (KEY/IDENT/NUM)
@@ -110,7 +197,15 @@ class Syntax_Analyzer{
         string ans;
 
         // procedure declare level ( if procnt >= 4 then print syntax error.)
-        int procnt;
+        //int procnt;
+
+        vector<tableList> TABLE;
+        int LEV;                    // LEV should < 4
+        int TX;
+        int curADR;
+
+        vector<Instruction> CODE;
+        //bool MAIN;
 
 };
 

@@ -29,10 +29,10 @@ int main() {
 
     // true  : output for debugging
     // false : output for oj
-    bool debug = false;
+    bool debug = true;
 
-    //freopen("../test2/t3.in","r", stdin);
-    //freopen("../test2/t3.txt","w",stdout);
+    freopen("../test3/t1.in","r", stdin);
+    //freopen("../test2/calling_itself.out","w",stdout);
 
     // Create Reserved Words Map
     map<string, int> mp;
@@ -54,13 +54,19 @@ int main() {
 
     // Syntax Analyzer
     Syntax_Analyzer Test = Syntax_Analyzer(SYM, LABEL);
-    if(Test.Program()){
+    Test.Program();
+    Test.TableOutput();
+    Test.CodeOutput();
+
+    //if(Test.Program()){
         // Output Syntax Tree
-        Test.TransferOutput(debug);
-    }
-    else{
-        cout<<"Syntax Error"<<endl;
-    }
+        //Test.TransferOutput(debug);
+        //Test.TableOutput();
+        //Test.CodeOutput();
+    //}
+    //else{
+    //    cout<<"Syntax Error"<<endl;
+    //}
 
     return 0;
 }
