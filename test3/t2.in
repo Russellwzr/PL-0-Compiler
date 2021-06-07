@@ -1,0 +1,13 @@
+CONST A=10;
+VAR B,C,D;
+PROCEDURE P;
+BEGIN
+    READ(B,C);
+    D:=B+C;
+    WRITE(D)
+END;
+BEGIN
+    CALL P;
+    READ(D);
+    WRITE(D)
+END.

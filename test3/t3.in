@@ -1,0 +1,11 @@
+CONST A=10;
+VAR B,C,D;
+BEGIN
+    READ(B);
+    WHILE B<5 DO
+        BEGIN
+            B:=B+1;
+            WRITE(B)
+        END
+END.
+

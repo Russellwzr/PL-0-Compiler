@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/PL-0-Compiler/Code_Interpreter.cpp">
+			<Option target="Compiler_Lab"/>
+		</Unit>
+		<Unit filename="D:/PL-0-Compiler/Code_Interpreter.h">
+			<Option target="Compiler_Lab"/>
+		</Unit>
 		<Unit filename="D:/PL-0-Compiler/Lexical_Analyzer.h">
 			<Option target="Compiler_Lab"/>
 		</Unit>

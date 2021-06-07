@@ -1,0 +1,12 @@
+CONST A=10;
+VAR B;
+PROCEDURE P;
+BEGIN
+    B:=1;
+    WRITE(B)
+END;
+BEGIN
+    CALL P;
+    B:=2;
+    WRITE(B)
+END.

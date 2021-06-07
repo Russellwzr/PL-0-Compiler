@@ -122,6 +122,33 @@ Compiler_Lab/fast:
 	$(MAKE) -f CMakeFiles\Compiler_Lab.dir\build.make CMakeFiles/Compiler_Lab.dir/build
 .PHONY : Compiler_Lab/fast
 
+Code_Interpreter.obj: Code_Interpreter.cpp.obj
+
+.PHONY : Code_Interpreter.obj
+
+# target to build an object file
+Code_Interpreter.cpp.obj:
+	$(MAKE) -f CMakeFiles\Compiler_Lab.dir\build.make CMakeFiles/Compiler_Lab.dir/Code_Interpreter.cpp.obj
+.PHONY : Code_Interpreter.cpp.obj
+
+Code_Interpreter.i: Code_Interpreter.cpp.i
+
+.PHONY : Code_Interpreter.i
+
+# target to preprocess a source file
+Code_Interpreter.cpp.i:
+	$(MAKE) -f CMakeFiles\Compiler_Lab.dir\build.make CMakeFiles/Compiler_Lab.dir/Code_Interpreter.cpp.i
+.PHONY : Code_Interpreter.cpp.i
+
+Code_Interpreter.s: Code_Interpreter.cpp.s
+
+.PHONY : Code_Interpreter.s
+
+# target to generate assembly for a file
+Code_Interpreter.cpp.s:
+	$(MAKE) -f CMakeFiles\Compiler_Lab.dir\build.make CMakeFiles/Compiler_Lab.dir/Code_Interpreter.cpp.s
+.PHONY : Code_Interpreter.cpp.s
+
 Syntax_Analyzer.obj: Syntax_Analyzer.cpp.obj
 
 .PHONY : Syntax_Analyzer.obj
@@ -185,6 +212,9 @@ help:
 	@echo ... edit_cache
 	@echo ... Compiler_Lab
 	@echo ... rebuild_cache
+	@echo ... Code_Interpreter.obj
+	@echo ... Code_Interpreter.i
+	@echo ... Code_Interpreter.s
 	@echo ... Syntax_Analyzer.obj
 	@echo ... Syntax_Analyzer.i
 	@echo ... Syntax_Analyzer.s

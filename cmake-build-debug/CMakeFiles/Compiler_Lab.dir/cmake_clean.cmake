@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Compiler_Lab.dir/Code_Interpreter.cpp.obj"
   "CMakeFiles/Compiler_Lab.dir/Syntax_Analyzer.cpp.obj"
   "CMakeFiles/Compiler_Lab.dir/main.cpp.obj"
   "Compiler_Lab.exe"

@@ -1,15 +1,6 @@
-const a=10;
-var b,c;
-procedure p;
+var a,b;
 begin
-    c:=b+a
-end;
-begin
-    read(b);
-    while b#0 do
-        begin
-            call p;
-            write(c);
-            read(b)
-        end
+	read(a,b);
+	a := a+b;
+	write(a)
 end.

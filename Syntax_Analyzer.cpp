@@ -52,22 +52,11 @@ Syntax_Analyzer::~Syntax_Analyzer(){
     curADR = DX;
 }
 
-bool Syntax_Analyzer::IsRedefined(string name, int idx){
-    for(int i = 0; i < TABLE[idx].t.size(); i ++){
-        if(TABLE[idx].t[i].NAME == name){
-            return true;
-        }
-    }
-    return false;
-}
-
-// Output the error information
-void Syntax_Analyzer::PrintErrorPos(string msg){
-    if(ip >= LABEL.size())
-        cerr<< "Error: Out Of Range in " << msg << "!" <<endl;
-    else
-        cerr<< "Error: Syntax Error at position "<< ip <<" "<<LABEL[ip]<<" in "<< msg << "!"<<endl;
-}
+//***********************************************************//
+//                                                           //
+//               functions for syntax analyzer               //
+//                                                           //
+//***********************************************************//
 
 // Insert a node to the syntax tree
 // int fatherID : the father's node id
@@ -103,7 +92,7 @@ bool Syntax_Analyzer::Program(){
     }
 
     // Jump to MAIN
-    CODE.push_back(Instruction("JMP", 0, 0));
+    GEN("JMP", 0, 0);
 
     // Judge <分程序>
     if(!SubProgram(fatherID, true)){
@@ -120,7 +109,7 @@ bool Syntax_Analyzer::Program(){
     // Judge .
     if(LABEL[ip] == "." && ip == LABEL.size() - 1){
         // Return
-        CODE.push_back(Instruction("OPR", 0, 0));
+        GEN("OPR", 0, 0);
         InsertNode(fatherID, LABEL[ip]);
     }
     else{
@@ -172,7 +161,7 @@ bool Syntax_Analyzer::SubProgram(int f, bool MAIN){
         // write back the entry address of MAIN
         CODE[0].a = CODE.size();
         // allocate space for MAIN
-        CODE.push_back(Instruction("INT", 0, TABLE[0].size));
+        GEN("INT", 0, TABLE[0].size);
     }
     // Judge <语句>
     if(!Sentence(fatherID)){
@@ -292,21 +281,6 @@ bool Syntax_Analyzer::ConstantDefine(int f){
 
 }
 
-/*
-bool Syntax_Analyzer::UnsignedNum(int f){
-    string msg = LABEL[ip];
-    InsertNode(f, msg);
-    for(int i = 0; i < msg.size(); i ++){
-        if(!IsNum(msg[i])){
-            PrintErrorPos(msg);
-            return false;
-        }
-    }
-    ip ++;
-    return true;
-}
-*/
-
 // <变量说明部分> → VAR<标识符>{ ,<标识符>};
 bool Syntax_Analyzer::VariableDeclare(int f){
 
@@ -396,27 +370,6 @@ bool Syntax_Analyzer::VariableDeclare(int f){
 
 }
 
-/*
-bool Syntax_Analyzer::Identifier(int f){
-    string msg = LABEL[ip];
-    InsertNode(f, msg);
-    if(!IsLetter(msg[0])){
-        PrintErrorPos(msg);
-        return false;
-    }
-    else{
-        for(int i = 1; i < msg.size(); i ++){
-            if(!IsLetter(msg[i]) && !IsNum(msg[i])){
-                PrintErrorPos(msg);
-                return false;
-            }
-        }
-        ip ++;
-        return true;
-    }
-}
-*/
-
 // <过程说明部分> → <过程首部><分程序>;{<过程说明部分>}
 bool Syntax_Analyzer::ProcedureDeclare(int f){
     // Judge procedure declare level
@@ -440,7 +393,7 @@ bool Syntax_Analyzer::ProcedureDeclare(int f){
         return false;
     }
     // allocate space for this procedure
-    CODE.push_back(Instruction("INT", 0, 3));
+    GEN("INT", 0, 3);
     int entryIdx = CODE.size() - 1;
 
     // <分程序>
@@ -462,15 +415,14 @@ bool Syntax_Analyzer::ProcedureDeclare(int f){
     // write back the "INT" Instruction's "a"
     CODE[entryIdx].a = TABLE[TX].size;
     // procedure return
-    CODE.push_back(Instruction("OPR", 0, 0));
+    GEN("OPR", 0, 0);
 
     // reset LEV
     LEV--;
     int idx1 = TABLE[TX].preIdx1;
     int idx2 = TABLE[TX].preIdx2;
     TX = idx1;
-    curADR = curADR + TABLE[TX].t[idx2].ADR;
-    TABLE[TX].t[idx2].ADR = curADR ++;
+    curADR = TABLE[TX].t[idx2].ADR + 1;
     // {<过程说明部分>}
     while(LABEL[ip] == "PROCEDURE"){
         if(!ProcedureDeclare(fatherID)){
@@ -514,9 +466,7 @@ bool Syntax_Analyzer::ProcedureHead(int f){
         e.NAME = LABEL[ip];
         e.KIND = "PROCEDURE";
         e.LEVEL = LEV - 1;
-        e.NEXT = curTX;
-        e.ADR = curADR;
-        e.CODEINDEX = CODE.size();
+        e.ADR = CODE.size();
         if(!IsRedefined(e.NAME, TX)){
             TABLE[TX].t.push_back(e);
             TABLE[curTX].preIdx1 = TX;
@@ -663,7 +613,7 @@ bool Syntax_Analyzer::Assignment(int f){
     }
 
     // search for variable position
-    Address ad = CalAddress(LABEL[ip - 2], false);
+    Address ad = LookUp(LABEL[ip - 2], false);
     if(ad.a == -1 && ad.l == -1){
         // Illegal access to variables
         string tmpmsg = "Error: Illegal access to variables !";
@@ -682,7 +632,7 @@ bool Syntax_Analyzer::Assignment(int f){
         return false;
     }
     // insert "STO" Instruction
-    CODE.push_back(Instruction("STO", ad.l, ad.a));
+    GEN("STO", ad.l, ad.a);
     return true;
 }
 
@@ -759,7 +709,7 @@ bool Syntax_Analyzer::Condition(int f){
             return false;
         }
         // Insert "OPR" instruction for "ODD"
-        CODE.push_back(Instruction("OPR", 0, 15));
+        GEN("OPR", 0, 15);
     }
     // <表达式><关系运算符><表达式>
     else{
@@ -778,22 +728,22 @@ bool Syntax_Analyzer::Condition(int f){
         }
         // Insert "OPR" instruction according to <关系运算符>
         if(curOP == "="){
-            CODE.push_back(Instruction("OPR", 0, 6));
+            GEN("OPR", 0, 6);
         }
         else if(curOP == "#"){
-            CODE.push_back(Instruction("OPR", 0, 7));
+            GEN("OPR", 0, 7);
         }
         else if(curOP == "<"){
-            CODE.push_back(Instruction("OPR", 0, 8));
+            GEN("OPR", 0, 8);
         }
         else if(curOP == "<="){
-            CODE.push_back(Instruction("OPR", 0, 9));
+            GEN("OPR", 0, 9);
         }
         else if(curOP == ">"){
-            CODE.push_back(Instruction("OPR", 0, 10));
+            GEN("OPR", 0, 10);
         }
         else if(curOP == ">="){
-            CODE.push_back(Instruction("OPR", 0, 11));
+            GEN("OPR", 0, 11);
         }
     }
     return true;
@@ -826,9 +776,8 @@ bool Syntax_Analyzer::Expression(int f){
         return false;
     }
     if(IsNegative){
-        // 0 - curItem
-        CODE.push_back(Instruction("LIT", 0, 0));
-        CODE.push_back(Instruction("OPR", 0, 3));
+        // -
+        GEN("OPR", 0, 15);
     }
     // {<加减运算符><项>}
     while(LABEL[ip] == "+" || LABEL[ip] == "-"){
@@ -840,10 +789,10 @@ bool Syntax_Analyzer::Expression(int f){
             return false;
         }
         if(IsAdd){
-            CODE.push_back(Instruction("OPR", 0, 2));
+            GEN("OPR", 0, 2);
         }
         else{
-            CODE.push_back(Instruction("OPR", 0, 3));
+            GEN("OPR", 0, 3);
         }
     }
     return true;
@@ -876,10 +825,10 @@ bool Syntax_Analyzer::Item(int f){
             return false;
         }
         if(IsMul){
-            CODE.push_back(Instruction("OPR", 0, 4));
+            GEN("OPR", 0, 4);
         }
         else{
-            CODE.push_back(Instruction("OPR", 0, 5));
+            GEN("OPR", 0, 5);
         }
     }
     return true;
@@ -918,7 +867,7 @@ bool Syntax_Analyzer::Factor(int f){
 
     // <标识符>
     if(SYM[ip] == "IDENT"){
-        Address ad = CalAddress(LABEL[ip], false);
+        Address ad = LookUp(LABEL[ip], false);
         // not defined
         if(ad.l == -1 && ad.a == -1){
             string tmpmsg = "Error: this variable is not defined !";
@@ -927,11 +876,11 @@ bool Syntax_Analyzer::Factor(int f){
         }
         // CONSTANT
         if(ad.l == -1){
-            CODE.push_back(Instruction("LIT", 0, ad.a));
+            GEN("LIT", 0, ad.a);
         }
         // VARIABLE
         else{
-            CODE.push_back(Instruction("LOD", ad.l, ad.a));
+            GEN("LOD", ad.l, ad.a);
         }
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
@@ -940,7 +889,7 @@ bool Syntax_Analyzer::Factor(int f){
 
     // <无符号整数>
     if(SYM[ip] == "NUM"){
-        CODE.push_back(Instruction("LIT", 0, atoi(LABEL[ip].c_str())));
+        GEN("LIT", 0, atoi(LABEL[ip].c_str()));
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
         return true;
@@ -948,37 +897,6 @@ bool Syntax_Analyzer::Factor(int f){
 
     return false;
 }
-
-/*
-bool Syntax_Analyzer::AddorSubOp(int f){
-    int fatherID = curIndex;
-    string msg = LABEL[ip];
-    InsertNode(f, msg);
-    if(SYM[ip] != "+" && SYM[ip] != "-"){
-        PrintErrorPos(msg);
-        return false;
-    }
-    else{
-        ip ++;
-        return true;
-    }
-}
-
-bool Syntax_Analyzer::MulorDivOp(int f){
-    int fatherID = curIndex;
-    string msg = LABEL[ip];
-    InsertNode(f, msg);
-    if(SYM[ip] != "*" && SYM[ip] != "/"){
-        PrintErrorPos(msg);
-        return false;
-    }
-    else{
-        ip ++;
-        return true;
-    }
-}
-
- */
 
 // <关系运算符> → =|#|<|<=|>|>=
 bool Syntax_Analyzer::RelationOp(int f){
@@ -1025,7 +943,7 @@ bool Syntax_Analyzer::IfSentence(int f){
             return false;
         }
         // insert "JPC" instruction the jump address remain to write......
-        CODE.push_back(Instruction("JPC", 0, 0));
+        GEN("JPC", 0, 0);
         int codeIdx = CODE.size() - 1;
         // THEN
         if(LABEL[ip] != "THEN"){
@@ -1079,14 +997,14 @@ bool Syntax_Analyzer::CallSentence(int f){
     }
     else{
         InsertNode(fatherID, LABEL[ip]);
-        Address ad = CalAddress(LABEL[ip], true);
+        Address ad = LookUp(LABEL[ip], true);
         if(ad.l == -1 && ad.a == -1){
             string tmpmsg = "Error: the procedure that is called is not defined !";
             PrintErrorPos(tmpmsg);
             return false;
         }
         else{
-            CODE.push_back(Instruction("CAL", ad.l, ad.a));
+            GEN("CAL", ad.l, ad.a);
         }
         ip ++;
     }
@@ -1120,7 +1038,7 @@ bool Syntax_Analyzer::WhileSentence(int f){
     }
     int jumpIdx = CODE.size();
     // insert "JPC" instruction to jump out the loop.
-    CODE.push_back(Instruction("JPC", 0, 0));
+    GEN("JPC", 0, 0);
     // DO
     if(LABEL[ip] != "DO"){
         PrintErrorPos(msg);
@@ -1135,7 +1053,7 @@ bool Syntax_Analyzer::WhileSentence(int f){
         PrintErrorPos(msg);
         return false;
     }
-    CODE.push_back(Instruction("JUMP", 0, loopIdx));
+    GEN("JMP", 0, loopIdx);
     CODE[jumpIdx].a = CODE.size();
     return true;
 }
@@ -1178,8 +1096,8 @@ bool Syntax_Analyzer::ReadSentence(int f){
         return false;
     }
     else{
-        CODE.push_back(Instruction("OPR", 0 ,12));
-        Address ad = CalAddress(LABEL[ip], false);
+        GEN("OPR", 0 ,12);
+        Address ad = LookUp(LABEL[ip], false);
         if(ad.a == -1 && ad.l == -1){
             // Illegal access to variables
             string tmpmsg = "Error: Illegal access to variables !";
@@ -1193,7 +1111,7 @@ bool Syntax_Analyzer::ReadSentence(int f){
             return false;
         }
         else{
-            CODE.push_back(Instruction("STO", ad.l, ad.a));
+            GEN("STO", ad.l, ad.a);
         }
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
@@ -1208,8 +1126,8 @@ bool Syntax_Analyzer::ReadSentence(int f){
             return false;
         }
         else{
-            CODE.push_back(Instruction("OPR", 0 ,12));
-            Address ad = CalAddress(LABEL[ip], false);
+            GEN("OPR", 0 ,12);
+            Address ad = LookUp(LABEL[ip], false);
             if(ad.a == -1 && ad.l == -1){
                 // Illegal access to variables
                 string tmpmsg = "Error: Illegal access to variables !";
@@ -1223,7 +1141,7 @@ bool Syntax_Analyzer::ReadSentence(int f){
                 return false;
             }
             else{
-                CODE.push_back(Instruction("STO", ad.l, ad.a));
+                GEN("STO", ad.l, ad.a);
             }
             InsertNode(fatherID, LABEL[ip]);
             ip ++;
@@ -1279,7 +1197,7 @@ bool Syntax_Analyzer::WriteSentence(int f){
         return false;
     }
     else{
-        Address ad = CalAddress(LABEL[ip], false);
+        Address ad = LookUp(LABEL[ip], false);
         if(ad.a == -1 && ad.l == -1){
             // Illegal access to variables
             string tmpmsg = "Error: Illegal access to variables !";
@@ -1287,12 +1205,12 @@ bool Syntax_Analyzer::WriteSentence(int f){
             return false;
         }
         if(ad.l == -1){
-            CODE.push_back(Instruction("LIT", 0, ad.a));
+            GEN("LIT", 0, ad.a);
         }
         else{
-            CODE.push_back(Instruction("LOD", ad.l, ad.a));
+            GEN("LOD", ad.l, ad.a);
         }
-        CODE.push_back(Instruction("OPR", 0, 13));
+        GEN("OPR", 0, 13);
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
     }
@@ -1305,7 +1223,7 @@ bool Syntax_Analyzer::WriteSentence(int f){
             return false;
         }
         else{
-            Address ad = CalAddress(LABEL[ip], false);
+            Address ad = LookUp(LABEL[ip], false);
             if(ad.a == -1 && ad.l == -1){
                 // Illegal access to variables
                 string tmpmsg = "Error: Illegal access to variables !";
@@ -1313,12 +1231,12 @@ bool Syntax_Analyzer::WriteSentence(int f){
                 return false;
             }
             if(ad.l == -1){
-                CODE.push_back(Instruction("LIT", 0, ad.a));
+                GEN("LIT", 0, ad.a);
             }
             else{
-                CODE.push_back(Instruction("LOD", ad.l, ad.a));
+                GEN("LOD", ad.l, ad.a);
             }
-            CODE.push_back(Instruction("OPR", 0, 13));
+            GEN("OPR", 0, 13);
             InsertNode(fatherID, LABEL[ip]);
             ip ++;
         }
@@ -1346,6 +1264,80 @@ bool Syntax_Analyzer::EmptySentence(int f){
     return true;
 }
 
+//***********************************************************//
+//                                                           //
+//       Functions for target instruction generation         //
+//                                                           //
+//***********************************************************//
+
+bool Syntax_Analyzer::IsRedefined(string name, int idx){
+    for(int i = 0; i < TABLE[idx].t.size(); i ++){
+        if(TABLE[idx].t[i].NAME == name){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Syntax_Analyzer::GEN(string f, int l, int a){
+    CODE.push_back(Instruction(f, l, a));
+}
+
+Address Syntax_Analyzer::LookUp(string name, bool flag){
+    // flag = 0 ---> VARIABLE  ---> return (l, data_address)
+    // flag = 0 ---> CONSTANT  ---> return (-1, val)
+    // flag = 1 ---> PROCEDURE ---> return (l, code_address)
+    // NO FIND  ---> return (-1, -1)
+    Address tmp;
+    int idx = TX, lev = 0;
+    while(idx != -1){
+        // PROCEDURE
+        if(flag){
+            for(int i = 0; i < TABLE[idx].t.size(); i ++){
+                if(TABLE[idx].t[i].NAME == name && TABLE[idx].t[i].KIND == "PROCEDURE"){
+                    tmp.l = lev;
+                    tmp.a = TABLE[idx].t[i].ADR;
+                    return tmp;
+                }
+            }
+        }
+        // VARIABLE or CONSTANT
+        else{
+            for(int i = 0; i < TABLE[idx].t.size(); i ++){
+                if(TABLE[idx].t[i].NAME == name && TABLE[idx].t[i].KIND != "PROCEDURE"){
+                    if(TABLE[idx].t[i].KIND == "VARIABLE"){
+                        tmp.l = lev;
+                        tmp.a = TABLE[idx].t[i].ADR;
+                    }
+                    else{
+                        tmp.l = -1;
+                        tmp.a = TABLE[idx].t[i].VAL;
+                    }
+                    return tmp;
+                }
+            }
+        }
+        idx = TABLE[idx].preIdx1;
+        lev ++;
+    }
+    tmp.l = tmp.a = -1;
+    return tmp;
+}
+
+//***********************************************************//
+//                                                           //
+//                 Functions for output                      //
+//                                                           //
+//***********************************************************//
+
+// Output the error information
+void Syntax_Analyzer::PrintErrorPos(string msg){
+    if(ip >= LABEL.size())
+        cerr<< "Error: Out Of Range in " << msg << "!" <<endl;
+    else
+        cerr<< "Error: Syntax Error at position "<< ip <<" "<<LABEL[ip]<<" in "<< msg << "!"<<endl;
+}
+
 // Output the syntax tree using dfs
 // int s : the source node's id
 void Syntax_Analyzer::TreeOutput(int s){
@@ -1366,7 +1358,7 @@ void Syntax_Analyzer::TreeOutput(int s){
     if(tree[s].size() == 0){
         return;
     }
-    // continue dfs......
+        // continue dfs......
     else{
         exp += "(";
         for(int i = 0; i < tree[s].size(); i ++){
@@ -1452,49 +1444,6 @@ void Syntax_Analyzer::TableOutput() {
 
         }
     }
-}
-
-Address Syntax_Analyzer::CalAddress(string name, bool flag){
-    // flag = 0 ---> VARIABLE  ---> return (l, a)
-    // flag = 0 ---> CONSTANT  ---> return (-1, val)
-    // flag = 1 ---> PROCEDURE ---> return (l, codeidx)
-    // NO FIND  ---> return (-1, -1)
-    Address tmp;
-    int idx = TX, lev = 0;
-    //cout << "CalAddress : ";
-    //cout << TX <<" "<<TABLE[TX].preIdx1<<" "<<flag<<endl;
-    while(idx != -1){
-        // PROCEDURE
-        if(flag){
-            for(int i = 0; i < TABLE[idx].t.size(); i ++){
-                if(TABLE[idx].t[i].NAME == name && TABLE[idx].t[i].KIND == "PROCEDURE"){
-                    tmp.l = lev;
-                    tmp.a = TABLE[idx].t[i].CODEINDEX;
-                    return tmp;
-                }
-            }
-        }
-        // VARIABLE
-        else{
-            for(int i = 0; i < TABLE[idx].t.size(); i ++){
-                if(TABLE[idx].t[i].NAME == name && TABLE[idx].t[i].KIND != "PROCEDURE"){
-                    if(TABLE[idx].t[i].KIND == "VARIABLE"){
-                        tmp.l = lev;
-                        tmp.a = TABLE[idx].t[i].ADR;
-                    }
-                    else{
-                        tmp.l = -1;
-                        tmp.a = TABLE[idx].t[i].VAL;
-                    }
-                    return tmp;
-                }
-            }
-        }
-        idx = TABLE[idx].preIdx1;
-        lev ++;
-    }
-    tmp.l = tmp.a = -1;
-    return tmp;
 }
 
 void Syntax_Analyzer::CodeOutput(){

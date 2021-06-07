@@ -11,13 +11,9 @@ struct tableElement{
     int LEVEL;
     int VAL;
     int ADR;
-    int NEXT;
-    int CODEINDEX;
     tableElement(){
         NAME = KIND = "";
         LEVEL = VAL = ADR = 0;
-        NEXT = -1;
-        CODEINDEX = 0;
     }
     tableElement(string NA, string KI, int LE, int VA, int AD, int NE){
         NAME = NA;
@@ -25,17 +21,6 @@ struct tableElement{
         LEVEL = LE;
         VAL = VA;
         ADR = AD;
-        NEXT = NE;
-        CODEINDEX = 0;
-    }
-    tableElement(string NA, string KI, int LE, int VA, int AD, int NE, int CO){
-        NAME = NA;
-        KIND = KI;
-        LEVEL = LE;
-        VAL = VA;
-        ADR = AD;
-        NEXT = NE;
-        CODEINDEX = CO;
     }
 };
 
@@ -93,11 +78,16 @@ class Syntax_Analyzer{
 
         ~Syntax_Analyzer();
 
-        //********************************************************************************
-        //
-        // Recursive Descent Subroutines For Syntax Analysis
-        //
-        //
+        //*******************************************************************************//
+        //                                                                               //
+        //                                                                               //
+        //              Recursive Descent Subroutines For Syntax Analysis                //
+        //                                                                               //
+        //                                                                               //
+        //*******************************************************************************//
+
+        // Insert a node to the syntax tree
+        void InsertNode(int father, string label);
 
         bool Program();
 
@@ -107,11 +97,7 @@ class Syntax_Analyzer{
 
         bool ConstantDefine(int);
 
-        //bool UnsignedNum(int);
-
         bool VariableDeclare(int);
-
-        //bool Identifier(int);
 
         bool ProcedureDeclare(int);
 
@@ -131,10 +117,6 @@ class Syntax_Analyzer{
 
         bool Factor(int);
 
-        //bool AddorSubOp(int);
-
-        //bool MulorDivOp(int);
-
         bool RelationOp(int);
 
         bool IfSentence(int);
@@ -147,22 +129,32 @@ class Syntax_Analyzer{
 
         bool WriteSentence(int);
 
-        //bool Letter(int);
-
-        //bool Num(int);
-
         bool EmptySentence(int);
 
-        //
-        //
-        //
-        //********************************************************************************
+        //*******************************************************************************//
+        //                                                                               //
+        //                                                                               //
+        //               Functions for target instruction generation                     //
+        //                                                                               //
+        //                                                                               //
+        //*******************************************************************************//
+
+        void GEN(string f, int l, int a);
+
+        Address LookUp(string name, bool flag);
+
+        bool IsRedefined(string name, int idx);
+
+        //*******************************************************************************//
+        //                                                                               //
+        //                                                                               //
+        //                                Functions for output                           //
+        //                                                                               //
+        //                                                                               //
+        //*******************************************************************************//
 
         // Output Error Information
         void PrintErrorPos(string msg);
-
-        // Insert a node to the syntax tree
-        void InsertNode(int father, string label);
 
         // Output the syntax tree
         void TreeOutput(int);
@@ -175,11 +167,11 @@ class Syntax_Analyzer{
 
         void TableOutput();
 
-        Address CalAddress(string name, bool flag);
-
-        bool IsRedefined(string name, int idx);
-
         void CodeOutput();
+
+        vector<Instruction> Target_Instructions(){
+            return CODE;
+        }
 
     private:
 
@@ -196,14 +188,13 @@ class Syntax_Analyzer{
         string exp;
         string ans;
 
-        // procedure declare level ( if procnt >= 4 then print syntax error.)
-        //int procnt;
-
+        // for target instruction generation
         vector<tableList> TABLE;
-        int LEV;                    // LEV should < 4
+        int LEV;                    // LEV should < 4 (procedure declare level)
         int TX;
         int curADR;
 
+        // target instructions
         vector<Instruction> CODE;
         //bool MAIN;
 

@@ -3,4 +3,4 @@ project(Compiler_Lab)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Compiler_Lab main.cpp Lexical_Analyzer.h utils.h Syntax_Analyzer.h Syntax_Analyzer.cpp)
+add_executable(Compiler_Lab main.cpp Lexical_Analyzer.h utils.h Syntax_Analyzer.h Syntax_Analyzer.cpp Code_Interpreter.h Code_Interpreter.cpp)
