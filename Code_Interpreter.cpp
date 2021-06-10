@@ -174,7 +174,7 @@ void Code_Interpreter::OneInstruction() {
             int element;
             cin >> element;
             Push(element);
-        }//
+        }
         // write
         else if(IR.a == 13){
             int element = Pop();

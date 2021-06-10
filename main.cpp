@@ -39,8 +39,8 @@ int main() {
         // false : output for oj
         bool debug = false;
 
-        freopen("../test3/t4.in","r", stdin);
-        freopen("../test3/t4.out","w",stdout);
+        freopen("../test3/t6.in","r", stdin);
+        freopen("../test3/t6.out","w",stdout);
 
         // Create Reserved Words Map
         map<string, int> mp;
@@ -69,6 +69,7 @@ int main() {
             for(int i = 0; i < CODE.size(); i ++){
                 cout << CODE[i].f << " " << CODE[i].l << " " << CODE[i].a << endl;
             }
+            //Test1.TableOutput();
         }
         else{
             cout<<"Syntax Error"<<endl;
@@ -77,7 +78,7 @@ int main() {
     }
     else{
         ifstream in;
-        in.open("../test3/t2.out");
+        in.open("../test3/t6.out");
         string f;
         int l,a;
         vector<Instruction> CODES;

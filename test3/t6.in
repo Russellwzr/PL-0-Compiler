@@ -1,0 +1,17 @@
+var a,b,ans;
+procedure p;
+    begin
+        ans := 0;
+        while b > 0 do
+            begin
+                if odd b then ans := ans + a;
+                a := a * 2;
+                b := b / 2
+            end
+    end;
+begin
+    read(a);
+    read(b);
+    call p;
+    write(ans)
+end.

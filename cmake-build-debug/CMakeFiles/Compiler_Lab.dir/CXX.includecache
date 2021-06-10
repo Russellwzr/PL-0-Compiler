@@ -6,31 +6,21 @@
 
 #IncludeRegexTransform: 
 
+D:/PL-0-Compiler/Code_Interpreter.cpp
+Code_Interpreter.h
 D:/PL-0-Compiler/Code_Interpreter.h
-bits/stdc++.h
--
-Syntax_Analyzer.h
-D:/PL-0-Compiler/Syntax_Analyzer.h
-
-D:/PL-0-Compiler/Lexical_Analyzer.h
-bits/stdc++.h
--
 utils.h
 D:/PL-0-Compiler/utils.h
 
-D:/PL-0-Compiler/Syntax_Analyzer.h
+D:/PL-0-Compiler/Code_Interpreter.h
 bits/stdc++.h
 -
-
-D:/PL-0-Compiler/main.cpp
-bits/stdc++.h
--
-Lexical_Analyzer.h
-D:/PL-0-Compiler/Lexical_Analyzer.h
 Syntax_Analyzer.h
 D:/PL-0-Compiler/Syntax_Analyzer.h
-Code_Interpreter.h
-D:/PL-0-Compiler/Code_Interpreter.h
+
+D:/PL-0-Compiler/Syntax_Analyzer.h
+bits/stdc++.h
+-
 
 D:/PL-0-Compiler/utils.h
 bits/stdc++.h

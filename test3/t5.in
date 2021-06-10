@@ -1,0 +1,21 @@
+VAR RX, DEPTH;
+    PROCEDURE PARENT;
+        VAR RX;
+        PROCEDURE CHILD;
+            VAR RX;
+            BEGIN
+                RX := DEPTH;
+                DEPTH := DEPTH - 1;
+                IF DEPTH > 0 THEN CALL CHILD;
+                WRITE(RX)
+            END;
+    BEGIN
+        RX := 5;
+        CALL CHILD;
+        WRITE(RX)
+    END;
+BEGIN
+    READ(DEPTH);
+    CALL PARENT;
+    WRITE(RX)
+END.

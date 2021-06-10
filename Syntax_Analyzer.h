@@ -91,7 +91,7 @@ class Syntax_Analyzer{
 
         bool Program();
 
-        bool SubProgram(int, bool);
+        bool SubProgram(int, bool, int, int);
 
         bool ConstantDeclare(int);
 
@@ -101,7 +101,7 @@ class Syntax_Analyzer{
 
         bool ProcedureDeclare(int);
 
-        bool ProcedureHead(int);
+        bool ProcedureHead(int, int&, int&);
 
         bool Sentence(int);
 
@@ -145,6 +145,10 @@ class Syntax_Analyzer{
 
         bool IsRedefined(string name, int idx);
 
+        vector<Instruction> Target_Instructions(){
+            return CODE;
+        }
+
         //*******************************************************************************//
         //                                                                               //
         //                                                                               //
@@ -169,10 +173,6 @@ class Syntax_Analyzer{
 
         void CodeOutput();
 
-        vector<Instruction> Target_Instructions(){
-            return CODE;
-        }
-
     private:
 
         vector<string> SYM;         // word type (KEY/IDENT/NUM)
@@ -196,7 +196,6 @@ class Syntax_Analyzer{
 
         // target instructions
         vector<Instruction> CODE;
-        //bool MAIN;
 
 };
 

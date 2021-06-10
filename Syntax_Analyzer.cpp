@@ -17,7 +17,6 @@ Syntax_Analyzer::Syntax_Analyzer(){
     TX = 0;
     curADR = DX;
     TABLE.push_back(tableList());
-    //MAIN = true;
 }
 
 Syntax_Analyzer::Syntax_Analyzer(vector<string>& SS, vector<string>& LL){
@@ -34,7 +33,6 @@ Syntax_Analyzer::Syntax_Analyzer(vector<string>& SS, vector<string>& LL){
     TX = 0;
     curADR = DX;
     TABLE.push_back(tableList());
-    //MAIN = true;
 }
 
 Syntax_Analyzer::~Syntax_Analyzer(){
@@ -95,7 +93,7 @@ bool Syntax_Analyzer::Program(){
     GEN("JMP", 0, 0);
 
     // Judge <分程序>
-    if(!SubProgram(fatherID, true)){
+    if(!SubProgram(fatherID, true, 0, 0)){
         PrintErrorPos(msg);
         return false;
     }
@@ -108,8 +106,6 @@ bool Syntax_Analyzer::Program(){
 
     // Judge .
     if(LABEL[ip] == "." && ip == LABEL.size() - 1){
-        // Return
-        GEN("OPR", 0, 0);
         InsertNode(fatherID, LABEL[ip]);
     }
     else{
@@ -122,19 +118,16 @@ bool Syntax_Analyzer::Program(){
 }
 
 // <分程序>→ [<常量说明部分>][<变量说明部分>][<过程说明部分>]<语句>
-bool Syntax_Analyzer::SubProgram(int f, bool MAIN){
+bool Syntax_Analyzer::SubProgram(int f, bool MAIN, int ProcedureEntryIdx1, int ProcedureEntryIdx2){
     string msg = "SUBPROG";
-
     // Insert current node to the syntax tree
     int fatherID = curIndex;
     InsertNode(f, msg);
-
     // Error : Out of range
     if(ip >= LABEL.size()){
         PrintErrorPos(msg);
         return false;
     }
-
     // Judge [<常量说明部分>]
     if(LABEL[ip] == "CONST"){
         if(!ConstantDeclare(fatherID)){
@@ -156,18 +149,27 @@ bool Syntax_Analyzer::SubProgram(int f, bool MAIN){
             return false;
         }
     }
+    // allocate space for this procedure
+    GEN("INT", 0, 3);
+    int entryIdx = CODE.size() - 1;
+    // write back the entry address of MAIN
     if(MAIN){
         MAIN = false;
-        // write back the entry address of MAIN
-        CODE[0].a = CODE.size();
-        // allocate space for MAIN
-        GEN("INT", 0, TABLE[0].size);
+        CODE[0].a = entryIdx;
+    }
+    else{
+        // write back the procedure (in the table list) address
+        TABLE[ProcedureEntryIdx1].t[ProcedureEntryIdx2].ADR = entryIdx;
     }
     // Judge <语句>
     if(!Sentence(fatherID)){
         PrintErrorPos(msg);
         return false;
     }
+    // write back the "INT" Instruction's "a"
+    CODE[entryIdx].a = TABLE[TX].size;
+    // procedure return
+    GEN("OPR", 0, 0);
     return true;
 }
 
@@ -263,11 +265,13 @@ bool Syntax_Analyzer::ConstantDefine(int f){
         return false;
     }
     else{
+        // string to int
         e.VAL = atoi(LABEL[ip].c_str());
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
     }
 
+    // Judge re-defined
     if(!IsRedefined(e.NAME, TX)){
         TABLE[TX].t.push_back(e);
     }
@@ -311,11 +315,13 @@ bool Syntax_Analyzer::VariableDeclare(int f){
         return false;
     }
     else{
+        // add to TABLE
         tableElement e;
         e.NAME = LABEL[ip];
         e.KIND = "VARIABLE";
         e.LEVEL = LEV;
         e.ADR = curADR ++;
+        // Judge re-defined
         if(!IsRedefined(e.NAME, TX)){
             TABLE[TX].t.push_back(e);
             TABLE[TX].size ++;
@@ -338,11 +344,13 @@ bool Syntax_Analyzer::VariableDeclare(int f){
             return false;
         }
         else{
+            // add to TABLE
             tableElement e;
             e.NAME = LABEL[ip];
             e.KIND = "VARIABLE";
             e.LEVEL = LEV;
             e.ADR = curADR ++;
+            // Judge re-defined
             if(!IsRedefined(e.NAME, TX)){
                 TABLE[TX].t.push_back(e);
                 TABLE[TX].size ++;
@@ -387,17 +395,17 @@ bool Syntax_Analyzer::ProcedureDeclare(int f){
         PrintErrorPos(msg);
         return false;
     }
+    // ProcedureEntryIdx1: index1 (1D) of this procedure in TABLE
+    // ProcedureEntryIdx2: index2 (2D) of this procedure in TABLE
+    int ProcedureEntryIdx1, ProcedureEntryIdx2;
     // <过程首部>
-    if(!ProcedureHead(fatherID)){
+    if(!ProcedureHead(fatherID, ProcedureEntryIdx1, ProcedureEntryIdx2)){
         PrintErrorPos(msg);
         return false;
     }
-    // allocate space for this procedure
-    GEN("INT", 0, 3);
-    int entryIdx = CODE.size() - 1;
 
     // <分程序>
-    if(!SubProgram(fatherID, false)){
+    if(!SubProgram(fatherID, false, ProcedureEntryIdx1, ProcedureEntryIdx2)){
         PrintErrorPos(msg);
         return false;
     }
@@ -411,11 +419,6 @@ bool Syntax_Analyzer::ProcedureDeclare(int f){
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
     }
-
-    // write back the "INT" Instruction's "a"
-    CODE[entryIdx].a = TABLE[TX].size;
-    // procedure return
-    GEN("OPR", 0, 0);
 
     // reset LEV
     LEV--;
@@ -434,7 +437,7 @@ bool Syntax_Analyzer::ProcedureDeclare(int f){
 }
 
 // <过程首部> → PROCEDURE <标识符>;
-bool Syntax_Analyzer::ProcedureHead(int f){
+bool Syntax_Analyzer::ProcedureHead(int f, int& ProcedureEntryIdx1, int& ProcedureEntryIdx2){
     // Insert current node to the syntax tree
     int fatherID = curIndex;
     string msg = "PROCEDUREHEAD";
@@ -469,6 +472,8 @@ bool Syntax_Analyzer::ProcedureHead(int f){
         e.ADR = CODE.size();
         if(!IsRedefined(e.NAME, TX)){
             TABLE[TX].t.push_back(e);
+            ProcedureEntryIdx1 = TX;                        // 1D index of this procedure
+            ProcedureEntryIdx2 = TABLE[TX].t.size() - 1;    // 2D index of this procedure
             TABLE[curTX].preIdx1 = TX;
             TABLE[curTX].preIdx2 = TABLE[TX].t.size() - 1;
             TX = curTX;
@@ -559,23 +564,7 @@ bool Syntax_Analyzer::Sentence(int f){
     else{
         EmptySentence(fatherID);
         return true;
-        /*
-        if((LABEL[ip] == "END") || ip == LABEL.size() - 1){
-            EmptySentence(fatherID);
-        }
-        else{
-            PrintErrorPos(msg);
-            return false;
-        }
-         */
     }
-
-    /*
-    if(Assignment(fatherID) || IfSentence(fatherID) || WhileSentence(fatherID) || CallSentence(fatherID)
-        || ReadSentence(fatherID) || WriteSentence(fatherID) || Combined(fatherID) || Empty(fatherID)){
-        return true;
-    }
-     */
 
     return true;
 }
@@ -668,10 +657,6 @@ bool Syntax_Analyzer::Combined(int f){
     while(LABEL[ip] == ";"){
         InsertNode(fatherID, LABEL[ip]);
         ip ++;
-        //if(LABEL[ip] == "END"){
-        //    EmptySentence(fatherID);
-        //   break;
-        //}
         if(!Sentence(fatherID)){
             PrintErrorPos(msg);
             return false;
@@ -709,7 +694,7 @@ bool Syntax_Analyzer::Condition(int f){
             return false;
         }
         // Insert "OPR" instruction for "ODD"
-        GEN("OPR", 0, 15);
+        GEN("OPR", 0, 14);
     }
     // <表达式><关系运算符><表达式>
     else{
@@ -900,17 +885,11 @@ bool Syntax_Analyzer::Factor(int f){
 
 // <关系运算符> → =|#|<|<=|>|>=
 bool Syntax_Analyzer::RelationOp(int f){
-    /*
-    int fatherID = curIndex;
-
-    InsertNode(f, msg);
-     */
     string msg = LABEL[ip];
     if(ip >= LABEL.size()){
         PrintErrorPos(msg);
         return false;
     }
-
     if(LABEL[ip] == "=" || LABEL[ip] == "#" || LABEL[ip] == "<"
     || LABEL[ip] == "<=" || LABEL[ip] == ">" || LABEL[ip] == ">="){
         InsertNode(f, LABEL[ip]);
@@ -1256,9 +1235,6 @@ bool Syntax_Analyzer::WriteSentence(int f){
 
 // <空语句> → epsilon
 bool Syntax_Analyzer::EmptySentence(int f){
-    //int fatherID = curIndex;
-    //string msg1 = "SENTENCE";
-    //InsertNode(f, msg1);
     string msg2 = "EMPTY";
     InsertNode(f, msg2);
     return true;
@@ -1326,7 +1302,7 @@ Address Syntax_Analyzer::LookUp(string name, bool flag){
 
 //***********************************************************//
 //                                                           //
-//                 Functions for output                      //
+//             Functions for output or debug                 //
 //                                                           //
 //***********************************************************//
 
@@ -1358,7 +1334,7 @@ void Syntax_Analyzer::TreeOutput(int s){
     if(tree[s].size() == 0){
         return;
     }
-        // continue dfs......
+    // continue dfs......
     else{
         exp += "(";
         for(int i = 0; i < tree[s].size(); i ++){
