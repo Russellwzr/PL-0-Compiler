@@ -19,10 +19,6 @@ string key_split[5] = {";",",",".","(",")"};
 
 // SYM : word type
 vector<string> SYM;
-// ID : the value of the user-defined identifier
-vector<string> ID;
-// NUM : user-defined num
-vector<ll> NUM;
 // LABEL : words array (lexical analyzer's output)
 vector<string> LABEL;
 // CODE : target instructions
@@ -55,7 +51,7 @@ int main() {
         }
 
         // Lexical Analyzer
-        if(GETSYM(SYM, ID, NUM, LABEL, mp) < 0){
+        if(GETSYM(SYM, LABEL, mp) < 0){
             cout<<"Lexical Error"<<endl;
             return -1;
         }

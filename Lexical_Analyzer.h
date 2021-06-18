@@ -40,7 +40,7 @@ void LEXICAL_OUTPUT(){
 // NOTE : Regardless of grammatical errors in this part
 //
 //***********************************************************************************************************
-int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<string>& LABEL, map<string, int> mp){
+int GETSYM(vector<string>& SYM, vector<string>& LABEL, map<string, int> mp){
     // Processing Loop......
     string str;
     while(getline(cin, str)){
@@ -64,7 +64,6 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                 if((i == len) || !IsLetter(str[i])){
                     SYM.push_back("NUM");
                     ll tmp_num = atoll(tmp.c_str());
-                    NUM.push_back(tmp_num);
                     output_info += "NUMBER ";
                     LABEL.push_back(LLtoString(tmp_num));
                     output_info += LLtoString(tmp_num);
@@ -115,7 +114,6 @@ int GETSYM(vector<string>& SYM, vector<string>& ID, vector<ll>& NUM, vector<stri
                     if((i >= len) || !IsLetter(str[i])){
                         SYM.push_back("IDENT");
                         LABEL.push_back(tmp);
-                        ID.push_back(tmp);
                         output_info += "IDENTIFIER ";
                         output_info += tmp;
                         output_info += '\n';
